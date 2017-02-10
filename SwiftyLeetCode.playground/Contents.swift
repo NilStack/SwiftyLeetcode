@@ -1,8 +1,43 @@
-//: Playground - noun: a place where people can play
+// Leetcode solutions in Swift.
+// Some solutions are from:
+// https://github.com/soapyigu/LeetCode_Swift
 
 import UIKit
 
 class Solution {}
+
+/**
+ * 1. Two Sum
+ * https://leetcode.com/problems/two-sum/
+ */
+
+extension Solution {
+    class func twoSum(nums: [Int], _ target: Int) -> [Int] {
+        
+        guard nums.count > 1 else { return [] }
+        
+        var map = [Int:Int]()
+        
+        for i in 0..<nums.count {
+            if let value = map[nums[i]] {
+                return [value + 1, i + 1]
+            }
+            
+            map[target - nums[i]] = i
+        }
+        
+        return []
+    }
+}
+
+/*:
+ ### Usage
+ */
+
+let twoSumNums = [2, 7, 11, 15]
+let target = 9
+
+Solution.twoSum(nums: twoSumNums, target)
 
 /**
  * 217. Contains Duplicate
