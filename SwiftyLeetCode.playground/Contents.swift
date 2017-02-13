@@ -1,4 +1,4 @@
-// Leetcode solutions in Swift.
+// Not only Leetcode solutions in Swift.
 // Some solutions are from:
 // https://github.com/soapyigu/LeetCode_Swift
 
@@ -116,6 +116,39 @@ twoSumIII.add(number: 3)
 twoSumIII.add(number: 5)
 twoSumIII.find(value: 4)
 twoSumIII.find(value: 7)
+
+/**
+ * Two Sum - Less than or equal to target
+ * http://www.lintcode.com/en/problem/two-sum-less-than-or-equal-to-target/
+ */
+
+extension Solution {
+    class func twoSum5(nums: [Int]?, _ target: Int) -> Int {
+        guard let nums = nums, nums.count > 1 else { return 0 }
+        
+        let sortedNums = nums.sorted()
+        var count = 0
+        var left = 0
+        var right = nums.count - 1
+        
+        while left < right {
+            let value = sortedNums[left] + sortedNums[right]
+            if(value > target) {
+                right -= 1
+            } else {
+                count += right - left
+                left += 1
+            }
+        }
+        
+        return count
+    }
+}
+
+let twoSum5Nums = [2, 7, 11, 15]
+let twoSum5Target = 24
+
+Solution.twoSum5(nums: twoSum5Nums, twoSum5Target)
 
 /**
  * 217. Contains Duplicate
