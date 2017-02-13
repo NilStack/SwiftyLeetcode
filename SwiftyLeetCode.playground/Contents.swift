@@ -30,9 +30,7 @@ extension Solution {
     }
 }
 
-/*:
- ### Usage
- */
+// Usage
 
 let twoSumNums = [2, 7, 11, 15]
 let twoSumTarget = 9
@@ -43,6 +41,8 @@ Solution.twoSum(nums: twoSumNums, twoSumTarget)
  * 167. Two Sum II - Input arary is sorted
  * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
  */
+
+//: ![Two Sum II](TwoSumII.png)
 
 extension Solution {
     class func twoSumII(nums: [Int]?, _ target: Int) -> [Int]? {
@@ -67,9 +67,7 @@ extension Solution {
     }
 }
 
-/*:
- ### Usage
- */
+// Usage
 
 let twoSumIINums = [2, 7, 11, 15]
 let twoSumIITarget = 9
@@ -90,9 +88,7 @@ extension Solution {
 
 }
 
-/*:
- ### Usage
- */
+// Usage
 
 let nums1 = [1, 5, 27, 8, 3, 186, 12, 22, 8, 962]
 Solution.containsDuplicate(nums: nums1)
@@ -124,9 +120,7 @@ extension Solution {
     }
 }
 
-/*:
- ### Usage
- */
+// Usage
 
 Solution.containsDuplicateII(nums: nums1, 3)
 Solution.containsDuplicateII(nums: nums1, 5)
