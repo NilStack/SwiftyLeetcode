@@ -75,6 +75,49 @@ let twoSumIITarget = 9
 Solution.twoSum(nums: twoSumIINums, twoSumIITarget)
 
 /**
+ * 170. Two Sum III - Data structure design
+ * https://leetcode.com/problems/two-sum-iii-data-structure-design
+ */
+
+class TwoSumIII {
+    private var map = [Int: Int]()
+    private var list = [Int]()
+
+    func add(number: Int) {
+        if let numCount = map[number] {
+            map[number] = numCount + 1
+        } else {
+            map[number] = 1
+            list.append(number)
+        }
+    }
+
+    func find(value: Int) -> Bool {
+
+        for number in list {
+            if let numCount = map[number], number == value - number, numCount > 1 {
+                return true
+            }
+
+            if let _ = map[value - number], number != value - number {
+                return true
+            }
+        }
+
+        return false
+    }
+
+}
+
+// usage
+let twoSumIII = TwoSumIII()
+twoSumIII.add(number: 1)
+twoSumIII.add(number: 3)
+twoSumIII.add(number: 5)
+twoSumIII.find(value: 4)
+twoSumIII.find(value: 7)
+
+/**
  * 217. Contains Duplicate
  * https://leetcode.com/problems/contains-duplicate/
  */
