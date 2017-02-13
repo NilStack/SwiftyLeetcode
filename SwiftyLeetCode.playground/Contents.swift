@@ -38,7 +38,7 @@ let twoSumTarget = 9
 Solution.twoSum(nums: twoSumNums, twoSumTarget)
 
 /**
- * 167. Two Sum II - Input arary is sorted
+ * 167. Two Sum II - Input array is sorted
  * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
  */
 
@@ -173,7 +173,7 @@ let nums2 = [3, 9, 32, 16, 0, 125, 1457, 83]
 Solution.containsDuplicate(nums: nums2)
 
 /**
- * 219. Contains Duplicate
+ * 219. Contains Duplicate II
  * https://leetcode.com/problems/contains-duplicate-ii/
  */
 
