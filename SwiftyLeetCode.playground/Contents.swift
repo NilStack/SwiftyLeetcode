@@ -151,6 +151,88 @@ let twoSum5Target = 24
 Solution.twoSum5(nums: twoSum5Nums, twoSum5Target)
 
 /**
+ *  Two Sum - Greater than target
+ * http://www.lintcode.com/en/problem/two-sum-greater-than-target/
+ */
+
+extension Solution {
+    class func twoSum6(nums: [Int]?, _ target: Int) -> Int {
+        guard let nums = nums, nums.count > 1 else { return 0 }
+        
+        let sortedNums = nums.sorted()
+        var count = 0
+        var left = 0
+        var right = nums.count - 1
+        
+        while left < right {
+            let value = sortedNums[left] + sortedNums[right]
+            if(value <= target) {
+                left += 1
+            } else {
+                count += right - left
+                right -= 1
+            }
+        }
+        
+        return count
+    }
+}
+
+let twoSum6Nums = [2, 7, 11, 15]
+let twoSum6Target = 24
+
+Solution.twoSum6(nums: twoSum6Nums, twoSum6Target)
+
+/**
+ * Two Sum - Difference equals to target
+ * http://www.lintcode.com/en/problem/two-sum-difference-equals-to-target/
+ */
+
+extension Solution {
+    class func twoSum7(nums: [Int]?, _ target: Int) -> [Int]? {
+        guard let nums = nums, nums.count > 1 else { return nil }
+        
+        let localTarget = target > 0 ? target : -target
+        
+        var map = [Int: Int]()
+        for (index, number) in nums.enumerated() {
+            map[number] = index
+        }
+        
+        let sortedNums = nums.sorted()
+        let count = nums.count - 1
+        
+        var j = 0
+        for i in 0..<count {
+            if i == j {
+                j += 1
+            }
+            
+            while (j < count && sortedNums[j] - sortedNums[i] < localTarget) {
+                j += 1
+            }
+            
+            if (j < count && sortedNums[j] - sortedNums[i] == localTarget) {
+                let index0 = map[sortedNums[i]]
+                let index1 = map[sortedNums[j]]
+                
+                if let index0 = index0, let index1 = index1 {
+                    
+                    return index0 < index1 ? [index0 + 1, index1 + 1] : [index1 + 1, index0 + 1]
+                    
+                }
+            }
+        }
+        return nil
+    }
+}
+
+let twoSum7Nums = [2, 7, 11, 15]
+let twoSum7Target = 5
+
+Solution.twoSum7(nums: twoSum7Nums, twoSum7Target)
+
+/**
  * 217. Contains Duplicate
  * https://leetcode.com/problems/contains-duplicate/
  */
