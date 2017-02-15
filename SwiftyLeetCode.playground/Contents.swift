@@ -38,6 +38,68 @@ let twoSumTarget = 9
 Solution.twoSum(nums: twoSumNums, twoSumTarget)
 
 /**
+ * 15. 3Sum
+ * https://leetcode.com/problems/3sum/
+ */
+
+extension Solution {
+    class func threeSum(nums: [Int]?) -> [[Int]]?{
+        guard let nums = nums, nums.count > 2 else { return nil }
+        
+        var results: [[Int]]?
+        let sortedNums = nums.sorted()
+        
+        for i in 0..<sortedNums.count - 2 {
+            
+            if (i > 0 && sortedNums[i] == sortedNums[i-1]) {
+                continue
+            }
+            
+            var left = i + 1
+            var right = sortedNums.count - 1
+            let target = -sortedNums[i]
+            
+            while (left < right) {
+                if (sortedNums[left] + sortedNums[right] == target) {
+
+                    if (results != nil) {
+                        results!.append([-target, sortedNums[left], sortedNums[right]])
+                        
+                        left += 1
+                        right -= 1
+                        
+                        while (left < right && sortedNums[left] == sortedNums[left - 1]) {
+                            left += 1
+                        }
+                        
+                        while (left < right && sortedNums[right] == sortedNums[right + 1]) {
+                            right -= 1
+                        }
+ 
+                    } else {
+                        results = [[Int]]()
+                    }
+                    
+                    
+                } else if (sortedNums[left] + sortedNums[right] < target) {
+                    left += 1
+                } else {
+                    right -= 1
+                }
+            }
+
+        }
+        
+        return results
+    }
+    
+}
+
+// usage
+
+let threeSumNums = [-1, 0, 1, 2, -1, -4]
+Solution.threeSum(nums: threeSumNums)
+/**
  * 167. Two Sum II - Input array is sorted
  * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
  */
