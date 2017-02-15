@@ -99,6 +99,44 @@ extension Solution {
 
 let threeSumNums = [-1, 0, 1, 2, -1, -4]
 Solution.threeSum(nums: threeSumNums)
+
+/**
+ * 16. 3Sum Closest
+ * https://leetcode.com/problems/3sum-closest/
+ */
+
+extension Solution {
+    class func threeSumClosest(nums: [Int]?, _ target: Int) -> Int?{
+        guard let nums = nums, nums.count > 2 else { return nil }
+        
+        let sortedNums = nums.sorted()
+        var closestSum = nums[0] + nums[1] + nums[2]
+        
+        for i in 0..<sortedNums.count - 1 {
+            var left = i + 1
+            var right = sortedNums.count - 1
+            while (left < right) {
+                let sum = sortedNums[i] + sortedNums[left] + sortedNums[right]
+                if (abs(target - sum) < abs(target - closestSum)) {
+                    closestSum = sum
+                }
+                if (sum < target) {
+                    left += 1
+                } else {
+                    right -= 1
+                }
+            }
+        }
+        
+        return closestSum
+    }
+}
+
+// usage
+
+let threeSumClosestNums = [-1, 2, 1, -4]
+Solution.threeSumClosest(nums: threeSumClosestNums, 1)
+
 /**
  * 167. Two Sum II - Input array is sorted
  * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
