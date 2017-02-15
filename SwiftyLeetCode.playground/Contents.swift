@@ -112,7 +112,7 @@ extension Solution {
         let sortedNums = nums.sorted()
         var closestSum = nums[0] + nums[1] + nums[2]
         
-        for i in 0..<sortedNums.count - 1 {
+        for i in 0..<sortedNums.count - 2 {
             var left = i + 1
             var right = sortedNums.count - 1
             while (left < right) {
@@ -383,3 +383,38 @@ extension Solution {
 Solution.containsDuplicateII(nums: nums1, 3)
 Solution.containsDuplicateII(nums: nums1, 5)
 Solution.containsDuplicateII(nums: nums2, 2)
+
+/**
+ * 259. 3Sum Smaller
+ * https://leetcode.com/problems/3sum-smaller
+ */
+
+extension Solution {
+    class func threeSumSmaller(nums: [Int]?, _ target: Int) -> Int {
+        guard let nums = nums, nums.count > 2 else { return 0 }
+        
+        let sortedNums = nums.sorted()
+        var count = 0
+        
+        for i in 0..<sortedNums.count - 2 {
+            var left = i + 1
+            var right = sortedNums.count - 1
+            while (left < right) {
+                let sum = sortedNums[i] + sortedNums[left] + sortedNums[right]
+                if (sum < target) {
+                    count += right - left
+                    left += 1
+                } else {
+                    right -= 1
+                }
+            }
+        }
+        
+        return count
+    }
+}
+
+// usage
+let threeSumSmallerNums = [-2, 0, 1, 3]
+let threeSumSmallerTarget = 2
+Solution.threeSumSmaller(nums: threeSumSmallerNums, threeSumSmallerTarget)

@@ -12,3 +12,4 @@ Not only Leetcode solutions in Swift.
 * [Two Sum - Difference equals to target](http://www.lintcode.com/en/problem/two-sum-difference-equals-to-target/)
 * [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
 * [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/)
+* [259. 3Sum Smaller](https://leetcode.com/problems/3sum-smaller)
