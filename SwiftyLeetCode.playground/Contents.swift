@@ -482,3 +482,47 @@ extension Solution {
 let threeSumSmallerNums = [-2, 0, 1, 3]
 let threeSumSmallerTarget = 2
 Solution.threeSumSmaller(nums: threeSumSmallerNums, threeSumSmallerTarget)
+
+/**
+ * 454. 4Sum II
+ * https://leetcode.com/problems/4sum-ii/
+ */
+
+extension Solution {
+    class func fourSumII(A: [Int]?, B: [Int]?, C: [Int]?, D: [Int]?) -> Int {
+        
+        guard let a = A, a.count > 0, let b = B, b.count > 0, let c = C, c.count > 0, let d = D, d.count > 0 else {
+            return 0
+        }
+        
+        let aCount = a.count, bCount = b.count, cCount = c.count, dCount = d.count
+        var map = [Int: Int]()
+        var result = 0
+        
+        for i in 0..<aCount {
+            for j in 0..<bCount {
+                if (map[a[i] + b[j]] != nil) {
+                    map[a[i] + b[j]]! += 1
+                } else {
+                    map[a[i] + b[j]] = 1
+                }
+            }
+        }
+        
+        for i in 0..<cCount {
+            for j in 0..<dCount {
+                let target = -(c[i] + d[j])
+                if let count = map[target] {
+                    result += count
+                }
+            }
+        }
+
+        return result
+    }
+}
+
+// usage
+
+let A = [ 1, 2], B = [-2,-1], C = [-1, 2], D = [0, 2]
+Solution.fourSumII(A: A, B: B, C: C, D: D)
