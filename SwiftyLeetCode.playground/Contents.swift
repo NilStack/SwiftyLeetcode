@@ -48,15 +48,16 @@ extension Solution {
         
         var results: [[Int]]?
         let sortedNums = nums.sorted()
+        let count = sortedNums.count
         
-        for i in 0..<sortedNums.count - 2 {
+        for i in 0..<count - 2 {
             
             if (i > 0 && sortedNums[i] == sortedNums[i-1]) {
                 continue
             }
             
             var left = i + 1
-            var right = sortedNums.count - 1
+            var right = count - 1
             let target = -sortedNums[i]
             
             while (left < right) {
@@ -110,11 +111,12 @@ extension Solution {
         guard let nums = nums, nums.count > 2 else { return nil }
         
         let sortedNums = nums.sorted()
+        let count = sortedNums.count
         var closestSum = nums[0] + nums[1] + nums[2]
         
-        for i in 0..<sortedNums.count - 2 {
+        for i in 0..<count - 2 {
             var left = i + 1
-            var right = sortedNums.count - 1
+            var right = count - 1
             while (left < right) {
                 let sum = sortedNums[i] + sortedNums[left] + sortedNums[right]
                 if (abs(target - sum) < abs(target - closestSum)) {
@@ -136,6 +138,67 @@ extension Solution {
 
 let threeSumClosestNums = [-1, 2, 1, -4]
 Solution.threeSumClosest(nums: threeSumClosestNums, 1)
+
+/**
+ * 18. 4Sum
+ * https://leetcode.com/problems/4sum/
+ */
+
+extension Solution {
+    class func fourSum(nums: [Int]?, _ target: Int) -> [[Int]]? {
+        guard let nums = nums, nums.count > 2 else { return nil }
+        
+        var results: [[Int]]?
+        let sortedNums = nums.sorted()
+        let count = sortedNums.count
+
+        for i in 0..<count - 3 {
+            if (i > 0 && sortedNums[i] == sortedNums[i-1]) {
+                continue
+            }
+            
+            for j in i+1..<count - 2 {
+                if (j > i + 1 && sortedNums[j] == sortedNums[j-1]) {
+                    continue
+                }
+                
+                var left = j + 1
+                var right = count - 1
+                while (left < right) {
+                    let sum = sortedNums[i] + sortedNums[j] + sortedNums[left] + sortedNums[right]
+                    if (sum < target) {
+                        left += 1
+                    } else if (sum > target) {
+                        right -= 1
+                    } else {
+                        if (results != nil) {
+                            results!.append([sortedNums[i], sortedNums[j], sortedNums[left], sortedNums[right]])
+                            left += 1
+                            right -= 1
+                            while (left < right && sortedNums[left] == sortedNums[left - 1 ]) {
+                                left += 1
+                            }
+                            while (left < right && sortedNums[right] == sortedNums[right - 1 ]) {
+                                right -= 1
+                            }
+                            
+                        } else {
+                            results = [[Int]]()
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        return results
+    }
+}
+
+// usage
+let fourSumNums = [1, 0, -1, 0, -2, 2]
+let fourSumTarget = 0
+Solution.fourSum(nums: fourSumNums, fourSumTarget)
 
 /**
  * 167. Two Sum II - Input array is sorted
@@ -394,15 +457,16 @@ extension Solution {
         guard let nums = nums, nums.count > 2 else { return 0 }
         
         let sortedNums = nums.sorted()
-        var count = 0
+        let count = sortedNums.count
+        var resultCount = 0
         
-        for i in 0..<sortedNums.count - 2 {
+        for i in 0..<count - 2 {
             var left = i + 1
-            var right = sortedNums.count - 1
+            var right = count - 1
             while (left < right) {
                 let sum = sortedNums[i] + sortedNums[left] + sortedNums[right]
                 if (sum < target) {
-                    count += right - left
+                    resultCount += right - left
                     left += 1
                 } else {
                     right -= 1
@@ -410,7 +474,7 @@ extension Solution {
             }
         }
         
-        return count
+        return resultCount
     }
 }
 
