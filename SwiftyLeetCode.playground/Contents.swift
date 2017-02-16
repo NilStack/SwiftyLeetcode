@@ -201,6 +201,33 @@ let fourSumTarget = 0
 Solution.fourSum(nums: fourSumNums, fourSumTarget)
 
 /**
+ * 49. Group Anagrams
+ * https://leetcode.com/problems/anagrams/
+ */
+
+extension Solution {
+    class func groupAnagrams(strs: [String]?) -> [[String]]? {
+        guard let strs = strs, strs.count > 0 else { return nil }
+        
+        var map = [String: [String]]()
+        strs.forEach { str in
+            let kStr = String(str.characters.sorted())
+            if(map[kStr] == nil) {
+                map[kStr] = [String]()
+            }
+            map[kStr]!.append(str)
+        }
+        
+        return Array(Array(map.values))
+    }
+}
+
+// usage
+
+let groupAnagramsStrs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+Solution.groupAnagrams(strs: groupAnagramsStrs)
+
+/**
  * 167. Two Sum II - Input array is sorted
  * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
  */
