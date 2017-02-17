@@ -228,6 +228,55 @@ let groupAnagramsStrs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 Solution.groupAnagrams(strs: groupAnagramsStrs)
 
 /**
+ * Question: 71. Simplify Path
+ * Link:  https://leetcode.com/problems/simplify-path/
+ * Author: Peng
+ */
+
+extension Solution {
+    class func simplifyPath(path: String?) -> String? {
+        guard let path = path, path.characters.count > 0 else {
+            return nil
+        }
+        
+        var result = "/"
+        let stubs = path.components(separatedBy: "/")
+        var paths = [String]()
+        
+        stubs.forEach { str in
+            if (str == "..") {
+                if (paths.count > 0) {
+                    paths.remove(at: paths.count - 1)
+                }
+            } else if (str != "." && str != "") {
+                paths.append(str)
+            }
+        }
+        
+        paths.forEach { path in
+            result += path + "/"
+        }
+        
+        let resultLength = result.characters.count
+        let index = result.index(result.startIndex, offsetBy: resultLength - 1)
+
+        if (resultLength > 1) {
+            result = result.substring(to: index)
+        }
+        
+        return result
+    }
+}
+
+// usage
+
+let path1 = "/home/"
+let path2 = "/a/./b/../../c/"
+
+Solution.simplifyPath(path: path1)
+Solution.simplifyPath(path: path2)
+
+/**
  * 134. Gas Station
  * https://leetcode.com/problems/gas-station/
  */
