@@ -228,6 +228,36 @@ let groupAnagramsStrs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 Solution.groupAnagrams(strs: groupAnagramsStrs)
 
 /**
+ * 134. Gas Station
+ * https://leetcode.com/problems/gas-station/
+ */
+
+extension Solution {
+    class func canCompleteCircuit(gas: [Int]?, cost: [Int]?) -> Int {
+        
+        guard let gas = gas, let cost = cost, gas.count > 0, cost.count > 0 else {
+            return -1
+        }
+        
+        var sum = 0
+        var total = 0
+        var index = -1
+        
+        for i in 0..<gas.count {
+            sum += gas[i] - cost[i]
+            total += gas[i] - cost[i]
+            
+            if (sum < 0) {
+                index = i
+                sum = 0
+            }
+        }
+        
+        return total < 0 ? -1 : index + 1
+    }
+}
+
+/**
  * 167. Two Sum II - Input array is sorted
  * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
  */
