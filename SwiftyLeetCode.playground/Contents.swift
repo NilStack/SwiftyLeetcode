@@ -632,3 +632,43 @@ extension Solution {
 
 let A = [ 1, 2], B = [-2,-1], C = [-1, 2], D = [0, 2]
 Solution.fourSumII(A: A, B: B, C: C, D: D)
+
+/**
+ * 475. Heaters
+ * https://leetcode.com/problems/heaters/
+ */
+
+extension Solution {
+    class func findRadius( houses:  inout [Int]?, heaters:  inout [Int]?) -> Int? {
+        guard houses != nil, heaters != nil else { return nil }
+        
+        houses!.sort()
+        heaters!.sort()
+        
+        let housesCount = houses!.count
+        let heatersCount = heaters!.count
+        var res = 0
+        var j = 0
+        
+        for i in 0..<housesCount {
+            let cur = houses![i]
+            
+            while (j < heatersCount - 1 && abs(heaters![j+1] - cur) <= abs(heaters![j] - cur)) {
+                j += 1
+            }
+            res = max(res, abs(heaters![j] - cur))
+        }
+        
+        return res
+    }
+}
+
+// usage
+
+var houses1: [Int]? = [1,2,3]
+var heaters1: [Int]? = [2]
+Solution.findRadius(houses: &houses1, heaters: &heaters1)
+
+var houses2: [Int]? = [1,2,3,4]
+var heaters2: [Int]? = [1,4]
+Solution.findRadius(houses: &houses2, heaters: &heaters2)
