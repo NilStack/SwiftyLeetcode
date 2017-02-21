@@ -20,7 +20,7 @@ extension Solution {
 
         for i in 0 ..< nums.count {
             if let value = map[nums[i]] {
-                return [value + 1, i + 1]
+                return [value, i]
             }
 
             map[target - nums[i]] = i
@@ -588,6 +588,54 @@ extension Solution {
 let threeSumSmallerNums = [-2, 0, 1, 3]
 let threeSumSmallerTarget = 2
 Solution.threeSumSmaller(nums: threeSumSmallerNums, threeSumSmallerTarget)
+
+/**
+ * 349. Intersection of Two Arrays
+ * https://leetcode.com/problems/intersection-of-two-arrays/
+ */
+
+extension Solution {
+    class func intersection(nums1: [Int]?, nums2: [Int]?) -> [Int]? {
+        guard let nums1 = nums1, let nums2 = nums2 else { return nil }
+        
+        let sortedNums2 = nums2.sorted()
+        var set = Set<Int>()
+        
+        for num in nums1 {
+            if set.contains(num) {
+                continue
+            }
+            
+            if let _ = binarySearch(sortedNums2, key: num) {
+                set.insert(num)
+            }
+        }
+        
+        return Array(set)
+    }
+    
+    // From Swift Algorithm Club (https://github.com/raywenderlich/swift-algorithm-club/blob/master/Binary%20Search)
+    class func binarySearch<T: Comparable>(_ a: [T], key: T) -> Int?  {
+        var lowerBound = 0
+        var upperBound = a.count
+        while lowerBound < upperBound {
+            let midIndex = lowerBound + (upperBound - lowerBound) / 2
+            if a[midIndex] == key {
+                return midIndex
+            } else if a[midIndex] < key {
+                lowerBound = midIndex + 1
+            } else {
+                upperBound = midIndex
+            }
+        }
+        return nil
+    }
+}
+
+// usage
+let intersectionNums1 = [1, 2, 2, 1]
+let intersectionNums2 = [2, 2]
+Solution.intersection(nums1: intersectionNums1, nums2: intersectionNums2)
 
 /**
  * 454. 4Sum II
