@@ -3,6 +3,7 @@
 Not only Leetcode solutions in Swift.
 
 * [1. Two Sum](https://leetcode.com/problems/two-sum/)
+* [14. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
 * [15. 3Sum](https://leetcode.com/problems/3sum/)
 * [16. 3Sum Closest](https://leetcode.com/problems/3sum-closest/)
 * [18. 4Sum](https://leetcode.com/problems/4sum/)

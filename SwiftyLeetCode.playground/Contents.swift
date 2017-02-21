@@ -38,6 +38,42 @@ let twoSumTarget = 9
 Solution.twoSum(nums: twoSumNums, twoSumTarget)
 
 /**
+ * 14. Longest Common Prefix
+ * https://leetcode.com/problems/longest-common-prefix/
+                  
+ */
+
+extension Solution {
+    class func longestCommonPrefix(strs: [String]?) -> String? {
+        guard let strs = strs, strs.count > 0 else {
+            return nil
+        }
+        
+        var prefix = strs[0]
+        for i in 1..<strs.count {
+            var j = 0
+            let str = strs[i]
+            let strCount = str.characters.count
+            let prefixCount = prefix.characters.count
+            while (j < strCount && j < prefixCount && str[str.index(str.startIndex, offsetBy: j)] == prefix[prefix.index(str.startIndex, offsetBy: j)]) {
+                j += 1
+            }
+            if j == 0 {
+                return ""
+            }
+            
+            prefix = prefix.substring(to: prefix.index(str.startIndex, offsetBy: j))
+        }
+        return prefix
+    }
+}
+
+// usage
+
+let longestCommonPrefixStrs = ["geeksforgeeks", "geeks", "geek", "geezer"]
+Solution.longestCommonPrefix(strs: longestCommonPrefixStrs)
+
+/**
  * 15. 3Sum
  * https://leetcode.com/problems/3sum/
  */
