@@ -633,9 +633,44 @@ extension Solution {
 }
 
 // usage
+
 let intersectionNums1 = [1, 2, 2, 1]
 let intersectionNums2 = [2, 2]
 Solution.intersection(nums1: intersectionNums1, nums2: intersectionNums2)
+
+/**
+ * 350. Intersection of Two Arrays II
+ * https://leetcode.com/problems/intersection-of-two-arrays-ii/
+ */
+
+extension Solution {
+    class func intersectionII(nums1: [Int]?, nums2: [Int]?) -> [Int]? {
+        guard let nums1 = nums1, let nums2 = nums2 else { return nil }
+        
+        var map = [Int: Int]()
+        for num in nums1 {
+            if let count = map[num] {
+                map[num] = count + 1
+            } else {
+                map[num] = 1
+            }
+        }
+        
+        var res = [Int]()
+        for num in nums2 {
+            if let count = map[num], count > 0 {
+                res.append(num)
+                map[num] = count - 1
+            }
+        }
+        return res
+    }
+}
+
+// usage
+let intersectionIINums1 = [1, 2, 2, 1]
+let intersectionIINums2 = [2, 2]
+Solution.intersectionII(nums1: intersectionIINums1, nums2: intersectionIINums2)
 
 /**
  * 454. 4Sum II
