@@ -753,6 +753,48 @@ let A = [ 1, 2], B = [-2,-1], C = [-1, 2], D = [0, 2]
 Solution.fourSumII(A: A, B: B, C: C, D: D)
 
 /**
+ * 463. Island Perimeter
+ * https://leetcode.com/problems/island-perimeter/
+ */
+
+extension Solution {
+    class func islandPerimeter(grid: [[Int]]?) -> Int? {
+        guard let grid = grid, grid.count > 0, grid[0].count > 0 else {
+            return nil
+        }
+        
+        var res = 0
+        let m = grid.count
+        let n = grid[0].count
+        
+        for i in 0..<m {
+            for j in 0..<n {
+                if (grid[i][j] == 0) {
+                    continue
+                }
+                res += 4
+                if (i > 0 && grid[i-1][j] == 1) {
+                    res -= 2
+                }
+                if (j > 0 && grid[i][j-1] == 1) {
+                    res -= 2
+                }
+            }
+        }
+        
+        return res
+    }
+}
+
+// usage
+
+let grid = [[0,1,0,0],
+            [1,1,1,0],
+            [0,1,0,0],
+            [1,1,0,0]]
+Solution.islandPerimeter(grid: grid)
+
+/**
  * 475. Heaters
  * https://leetcode.com/problems/heaters/
  */
