@@ -313,6 +313,50 @@ Solution.simplifyPath(path: path1)
 Solution.simplifyPath(path: path2)
 
 /**
+ * 128. Longest Consecutive Sequence
+ * https://leetcode.com/problems/longest-consecutive-sequence/
+ */
+
+extension Solution {
+    class func longestConsecutive(nums: [Int]?) -> Int?{
+        guard let nums = nums else {
+            return nil
+        }
+        
+        var res = 0
+        var s: Set<Int> = Set(nums)
+        
+        for num in nums {
+            if (s.contains(num)) {
+                s.remove(num)
+                
+                var pre = num - 1
+                var next = num + 1
+                while (s.contains(pre)) {
+                    s.remove(pre)
+                    pre -= 1
+                }
+                
+                while (s.contains(next)) {
+                    s.remove(next)
+                    next += 1
+                }
+                
+                res = max(res, next - pre - 1)
+                
+            }
+        }
+        
+        return res
+    }
+}
+
+// usage
+
+let longestConsecutiveNums = [100, 4, 200, 1, 3, 2]
+Solution.longestConsecutive(nums: longestConsecutiveNums)
+
+/**
  * 134. Gas Station
  * https://leetcode.com/problems/gas-station/
  */
