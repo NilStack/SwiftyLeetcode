@@ -762,6 +762,39 @@ let threeSumSmallerTarget = 2
 Solution.threeSumSmaller(nums: threeSumSmallerNums, threeSumSmallerTarget)
 
 /**
+ * 325. Maximum Size Subarray Sum Equals k
+ * https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/
+ */
+
+extension Solution {
+    class func maxSubArrayLen(nums: [Int]?, _ k: Int) -> Int {
+        guard let nums = nums else { return 0 }
+        
+        var sum = 0
+        var res = 0
+        var m = [Int: Int]()
+        
+        for (i, num) in nums.enumerated() {
+            sum += num
+            if (sum == k) {
+               res = i + 1
+            } else if let idx = m[sum - k] {
+                res = max(res, i - idx)
+            }
+            
+            if (m[sum] == nil) {
+                m[sum] = i
+            }
+        }
+        return res
+    }
+}
+
+// usage
+let maxSubArrayLenNums = [1, -1, 5, -2, 3]
+Solution.maxSubArrayLen(nums: maxSubArrayLenNums, 3)
+
+/**
  * 349. Intersection of Two Arrays
  * https://leetcode.com/problems/intersection-of-two-arrays/
  */

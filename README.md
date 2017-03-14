@@ -21,6 +21,7 @@ Not only Leetcode solutions in Swift.
 * [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii/)
 * [229. Majority Element II](https://leetcode.com/problems/majority-element-ii/)
 * [259. 3Sum Smaller](https://leetcode.com/problems/3sum-smaller)
+* [325. Maximum Size Subarray Sum Equals k](https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/)
 * [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/)
 * [350. Intersection of Two Arrays II](http://www.jiuzhang.com/solutions/intersection-of-two-arrays-ii/)
 * [454. 4Sum II](https://leetcode.com/problems/4sum-ii/)
