@@ -424,6 +424,38 @@ let twoSumIITarget = 9
 Solution.twoSum(nums: twoSumIINums, twoSumIITarget)
 
 /**
+ * 169. Majority Element
+ * https://leetcode.com/problems/majority-element/
+ */
+
+extension Solution {
+    class func majorityElement(nums: [Int]?) -> Int? {
+        guard let nums = nums, nums.count > 1 else { return nil }
+        
+        var major = 0
+        var count = 0
+        
+        for num in nums {
+            if (count == 0) {
+                major = num
+                count += 1
+            } else if (major == num) {
+                count += 1
+            } else {
+                count -= 1
+            }
+        }
+        
+        return major
+    }
+}
+
+// usage
+
+let majorityElementNums = [2, 6, 2, 40, 15, 2, 2, 36]
+Solution.majorityElement(nums: majorityElementNums)
+
+/**
  * 170. Two Sum III - Data structure design
  * https://leetcode.com/problems/two-sum-iii-data-structure-design
  */
@@ -632,6 +664,66 @@ extension Solution {
 Solution.containsDuplicateII(nums: nums1, 3)
 Solution.containsDuplicateII(nums: nums1, 5)
 Solution.containsDuplicateII(nums: nums2, 2)
+
+/**
+ * 229. Majority Element II
+ * https://leetcode.com/problems/majority-element-ii/
+ */
+
+extension Solution {
+    class func majorityElementII(nums: [Int]?) -> [Int]? {
+        guard let nums = nums, nums.count > 1 else { return nil }
+        
+        var count1 = 0
+        var count2 = 0
+        var candidate1 = 0
+        var candidate2 = 0
+        var res = [Int]()
+        
+        for num in nums {
+            if (num == candidate1) {
+                count1 += 1
+            } else if (num == candidate2){
+                count2 += 1
+            } else if (count1 == 0) {
+                candidate1 = num
+                count1 = 1
+            } else if (count2 == 0) {
+                candidate2 = num
+                count2 = 1
+            } else {
+                count1 -= 1
+                count2 -= 1
+            }
+        }
+        
+        count1 = 0
+        count2 = 0
+        
+        for num in nums {
+            if num == candidate1 {
+                count1 += 1
+            }
+            if num == candidate2 {
+                count2 += 1
+            }
+        }
+        
+        if count1 > nums.count / 3 {
+            res.append(candidate1)
+        }
+        if count2 > nums.count / 3 {
+            res.append(candidate2)
+        }
+        
+        return res
+    }
+}
+
+// usage
+
+let majorityElementIINums = [1,3, 7, 1, 1, 8, 3, 2, 1]
+Solution.majorityElementII(nums: majorityElementIINums)
 
 /**
  * 259. 3Sum Smaller
